@@ -1,0 +1,18 @@
+<%= turbo_stream.append :posts do %>
+  <% @posts.each do |post| %>
+    <div style="border: 2px solid green; border-radius: 5px; padding-left: 5px">
+      <%= render post %>
+      <p>
+        <%= link_to "Show this post", post %>
+      </p>
+    </div>
+    <br>
+  <% end %>
+<% end %>
+
+<% if @pagy.next.present? %>
+  <%= turbo_stream.replace :pagination do %>
+    <%= turbo_frame_tag :pagination, loading: :lazy,
+                        src: posts_path(format: :turbo_stream, page: @pagy.next, q: params[:q]&.to_unsafe_h) %>
+  <% end %>
+<% end %>

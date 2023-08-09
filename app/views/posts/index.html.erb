@@ -8,18 +8,11 @@
                      oninput: 'this.form.requestSubmit()', autofocus: true, autocomplete: 'off' %>
 <% end %>
 <br>
-<%= turbo_frame_tag :results do %>
+<%= turbo_frame_tag :results, data: { turbo_action: 'advance' } do %>
   <%= Time.zone.now %>
-  <div id="posts">
-    <% @posts.each do |post| %>
-      <div style="border: 2px solid green; border-radius: 5px; padding-left: 5px">
-        <%= render post %>
-        <p>
-          <%= link_to "Show this post", post %>
-        </p>
-      </div>
-      <br>
-    <% end %>
-  </div>
+  <div id="posts"></div>
+
+  <%= turbo_frame_tag :pagination, loading: :lazy,
+                      src: posts_path(format: :turbo_stream, q: params[:q]&.to_unsafe_h) %>
 <% end %>
 <%#= link_to "New post", new_post_path %>

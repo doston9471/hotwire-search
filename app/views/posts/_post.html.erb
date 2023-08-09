@@ -6,17 +6,20 @@
 
   <p>
     <strong>Title:</strong>
-    <%= post.title %>
+    <%#= post.title %>
+    <%= highlight(post.title, params.dig(:q, :title_or_description_or_body_cont)) %>
   </p>
 
   <p>
     <strong>Description:</strong>
-    <%= post.description %>
+    <%#= post.description %>
+    <%= highlight(post.description, params.dig(:q, :title_or_description_or_body_cont)) %>
   </p>
 
   <p>
     <strong>Body:</strong>
-    <%= post.body %>
+    <%#= post.body %>
+    <%= highlight(post.body, params.dig(:q, :title_or_description_or_body_cont)) %>
   </p>
 
 </div>
