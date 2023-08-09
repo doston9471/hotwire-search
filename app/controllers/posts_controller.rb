@@ -3,7 +3,11 @@ class PostsController < ApplicationController
 
   # GET /posts or /posts.json
   def index
-    @posts = Post.all
+    # @posts = Post.all
+    # @q = Post.ransack(params[:q])
+    search_params = params.permit(:format, q: [:title_or_description_or_body_cont])
+    @q = Post.ransack(search_params[:q])
+    @posts = @q.result(distinct: true).order(created_at: :asc).to_a.uniq
   end
 
   # GET /posts/1 or /posts/1.json

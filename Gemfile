@@ -66,3 +66,5 @@ end
 
 
 gem "faker", "~> 3.2"
+
+gem "ransack", "~> 4.0"
