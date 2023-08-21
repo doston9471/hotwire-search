@@ -1,24 +1,32 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+This simple project contains [**Hotwire**](https://hotwired.dev/) instant search with [**ransack**](https://activerecord-hackery.github.io/ransack/) gem and infinite pagination with [**pagy**](https://ddnexus.github.io/pagy/) gem
 
-Things you may want to cover:
+## Project contains:
 
-* Ruby version
+* Ruby - 3.2.2
+* Rails - 7.0.6
+* PostgreSQL
+* Ransack
+* Pagy
 
-* System dependencies
+## How to run the project:
 
-* Configuration
+```ruby
+bundle install
 
-* Database creation
+rails db:create
 
-* Database initialization
+rails db:migrate
 
-* How to run the test suite
+rails db:seed
 
-* Services (job queues, cache servers, search engines, etc.)
+rails s
+```
 
-* Deployment instructions
+## Contributing
 
-* ...
+Pull requests are welcome. For major changes, please open an issue first
+to discuss what you would like to change.
+
+Please make sure to update tests as appropriate.
