@@ -1,0 +1,32 @@
+# Git
+.git
+.gitignore
+
+# Bundler / Ruby
+.bundle
+vendor/bundle
+
+# Env / secrets
+.env
+.env.*
+/config/master.key
+
+# Logs / temp / storage
+/log/*
+/tmp/*
+/storage/*
+/public/assets
+*.log
+
+# IDE / OS
+.idea
+.vscode
+.ruby-lsp
+.DS_Store
+*.swp
+*~
+
+# Test artifacts
+/coverage
+/spec/examples.txt
+.rspec_status

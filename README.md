@@ -4,24 +4,53 @@ This simple project contains [**Hotwire**](https://hotwired.dev/) instant search
 
 ## Project contains:
 
-* Ruby - 3.2.2
-* Rails - 7.0.6
+* Ruby - 4.0.5
+* Rails - 8.1
 * PostgreSQL
+* Redis
 * Ransack
 * Pagy
 
-## How to run the project:
+## Run with Docker (recommended)
 
-```ruby
+You only need [Docker](https://docs.docker.com/get-docker/) installed.
+
+```bash
+docker compose up --build
+```
+
+Then open [http://localhost:3000](http://localhost:3000).
+
+On first boot the app waits for Postgres, runs migrations, and seeds sample posts automatically.
+
+Useful commands:
+
+```bash
+# Rebuild after Gemfile changes
+docker compose up --build
+
+# Rails console
+docker compose exec web bin/rails console
+
+# Re-seed posts
+docker compose exec web bin/rails db:seed
+
+# Run specs
+docker compose exec -e RAILS_ENV=test -e DATABASE_URL=postgres://postgres:postgres@db:5432/hotwire_search_test web bin/rails db:prepare
+docker compose exec -e RAILS_ENV=test -e DATABASE_URL=postgres://postgres:postgres@db:5432/hotwire_search_test web bundle exec rspec
+
+# Stop everything
+docker compose down
+```
+
+## Run locally (without Docker)
+
+Requires Ruby 4.0.5, PostgreSQL, and Redis.
+
+```bash
 bundle install
-
-rails db:create
-
-rails db:migrate
-
-rails db:seed
-
-rails s
+bin/rails db:create db:migrate db:seed
+bin/rails server
 ```
 
 ## Contributing

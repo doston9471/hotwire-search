@@ -1,15 +1,13 @@
 class PostsController < ApplicationController
-  include Pagy::Backend
+  include Pagy::Method
   before_action :set_post, only: %i[ show edit update destroy ]
 
   # GET /posts or /posts.json
   def index
-    # @posts = Post.all
-    # @q = Post.ransack(params[:q])
     search_params = params.permit(:format, :page, q: [:title_or_description_or_body_cont])
     @q = Post.ransack(search_params[:q])
     posts = @q.result(distinct: true).order(created_at: :asc)
-    @pagy, @posts = pagy_countless(posts, items: 2)
+    @pagy, @posts = pagy(:countless, posts, limit: 2)
   end
 
   # GET /posts/1 or /posts/1.json
@@ -34,8 +32,8 @@ class PostsController < ApplicationController
         format.html { redirect_to post_url(@post), notice: "Post was successfully created." }
         format.json { render :show, status: :created, location: @post }
       else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @post.errors, status: :unprocessable_entity }
+        format.html { render :new, status: :unprocessable_content }
+        format.json { render json: @post.errors, status: :unprocessable_content }
       end
     end
   end
@@ -47,8 +45,8 @@ class PostsController < ApplicationController
         format.html { redirect_to post_url(@post), notice: "Post was successfully updated." }
         format.json { render :show, status: :ok, location: @post }
       else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @post.errors, status: :unprocessable_entity }
+        format.html { render :edit, status: :unprocessable_content }
+        format.json { render json: @post.errors, status: :unprocessable_content }
       end
     end
   end
