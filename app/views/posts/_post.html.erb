@@ -1,25 +1,17 @@
-<div id="<%= dom_id post %>">
-  <p>
-    <strong>ID:</strong>
-    <%= post.id %>
-  </p>
+<article id="<%= dom_id post %>" class="post">
+  <p class="post-id">#<%= post.id %></p>
 
-  <p>
-    <strong>Title:</strong>
-    <%#= post.title %>
-    <%= highlight(post.title, params.dig(:q, :title_or_description_or_body_cont)) %>
-  </p>
+  <h2>
+    <%= link_to post, data: { turbo_frame: "_top" } do %>
+      <%= highlight(post.title, params.dig(:q, :title_or_description_or_body_cont)) %>
+    <% end %>
+  </h2>
 
-  <p>
-    <strong>Description:</strong>
-    <%#= post.description %>
+  <p class="description">
     <%= highlight(post.description, params.dig(:q, :title_or_description_or_body_cont)) %>
   </p>
 
-  <p>
-    <strong>Body:</strong>
-    <%#= post.body %>
+  <p class="body">
     <%= highlight(post.body, params.dig(:q, :title_or_description_or_body_cont)) %>
   </p>
-
-</div>
+</article>

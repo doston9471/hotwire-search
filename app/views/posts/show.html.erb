@@ -1,10 +1,31 @@
-<p style="color: green"><%= notice %></p>
+<% if notice.present? %>
+  <p class="notice"><%= notice %></p>
+<% end %>
 
-<%= render @post %>
+<article class="post-detail">
+  <div>
+    <p class="label">ID</p>
+    <p class="value">#<%= @post.id %></p>
+  </div>
 
-<div>
-  <%= link_to "Edit this post", edit_post_path(@post) %> |
-  <%= link_to "Back to posts", posts_path %>
+  <div>
+    <p class="label">Title</p>
+    <p class="value title"><%= @post.title %></p>
+  </div>
 
-  <%= button_to "Destroy this post", @post, method: :delete %>
-</div>
+  <div>
+    <p class="label">Description</p>
+    <p class="value"><%= @post.description %></p>
+  </div>
+
+  <div>
+    <p class="label">Body</p>
+    <p class="value"><%= @post.body %></p>
+  </div>
+</article>
+
+<nav class="actions">
+  <%= link_to "Edit", edit_post_path(@post), class: "btn-ghost" %>
+  <%= link_to "Back to search", posts_path, class: "btn-ghost" %>
+  <%= button_to "Delete", @post, method: :delete, form: { data: { turbo_confirm: "Delete this post?" } } %>
+</nav>

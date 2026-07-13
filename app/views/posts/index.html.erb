@@ -1,18 +1,31 @@
-<!--<p style="color: green"><%#= notice %></p>-->
+<section class="desk">
+  <h1 class="brand">
+    Hotwire
+    <span>Search</span>
+  </h1>
+  <p class="lede">Type a word — results stream in live as you scroll.</p>
 
-<h1>Posts</h1>
-<%= Time.zone.now %>
-<%= search_form_for @q, data: { turbo_frame: :results } do |f| %>
-  <%= f.label :title_or_description_or_body_cont %>
-  <%= f.search_field :title_or_description_or_body_cont,
-                     oninput: 'this.form.requestSubmit()', autofocus: true, autocomplete: 'off' %>
-<% end %>
-<br>
-<%= turbo_frame_tag :results, data: { turbo_action: 'advance' } do %>
-  <%= Time.zone.now %>
+  <%= search_form_for @q, html: { class: "search-form" }, data: { turbo_frame: :results } do |f| %>
+    <%= f.label :title_or_description_or_body_cont, "Search posts" %>
+    <%= f.search_field :title_or_description_or_body_cont,
+                       class: "search-field",
+                       placeholder: "Search titles, descriptions, body…",
+                       oninput: "this.form.requestSubmit()",
+                       autofocus: true,
+                       autocomplete: "off" %>
+  <% end %>
+
+  <div class="meta-row">
+    <span class="meta-dot" aria-hidden="true"></span>
+    <span>Live results · infinite scroll</span>
+  </div>
+</section>
+
+<%= turbo_frame_tag :results, class: "results-frame", data: { turbo_action: "advance" } do %>
   <div id="posts"></div>
 
-  <%= turbo_frame_tag :pagination, loading: :lazy,
+  <%= turbo_frame_tag :pagination,
+                      class: "pagination-sentinel",
+                      loading: :lazy,
                       src: posts_path(format: :turbo_stream, q: params[:q]&.to_unsafe_h) %>
 <% end %>
-<%#= link_to "New post", new_post_path %>
