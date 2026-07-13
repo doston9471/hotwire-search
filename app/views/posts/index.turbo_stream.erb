@@ -1,8 +1,8 @@
 <%= turbo_stream.append :posts do %>
   <% @posts.each do |post| %>
-    <div class="post-result">
+    <%= link_to post, class: "post-result", data: { turbo_frame: "_top" } do %>
       <%= render post %>
-    </div>
+    <% end %>
   <% end %>
 <% end %>
 

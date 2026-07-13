@@ -2,9 +2,7 @@
   <p class="post-id">#<%= post.id %></p>
 
   <h2>
-    <%= link_to post, data: { turbo_frame: "_top" } do %>
-      <%= highlight(post.title, params.dig(:q, :title_or_description_or_body_cont)) %>
-    <% end %>
+    <%= highlight(post.title, params.dig(:q, :title_or_description_or_body_cont)) %>
   </h2>
 
   <p class="description">
